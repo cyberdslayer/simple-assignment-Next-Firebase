@@ -73,9 +73,9 @@ export default function Signin() {
                     </div> */}
 
           <div className="text-gray-400 ">
-            Already a user?
-            <Link className="text-blue-600 mx-2" href="#">
-              Log in
+            Don't have a account? 
+            <Link className="text-blue-600 mx-2" href="/signup">
+              SignUp
             </Link>
           </div>
         </div>

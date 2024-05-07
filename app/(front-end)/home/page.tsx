@@ -11,13 +11,13 @@ import Slider from "../components/slider";
 
 export default function Signin() {
     const auth = getAuth(app);
-    const currentUser = auth.currentUser;
+    const currentuser = auth.currentUser;
     const router = useRouter();
     useEffect(()=>{
-        if(!currentUser){
+        if(!currentuser){
             router.push("/signin")
         }
-    }, []) 
+    }, [currentuser]) 
 
 
     return ( 

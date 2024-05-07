@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { LabelledInput } from "../signin/page";
+import LabelledInput from "./labbledInput";
+
 
 const AuthWithEmail = ({
   email,

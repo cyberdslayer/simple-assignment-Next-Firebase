@@ -2,13 +2,13 @@ import Link from "next/link";
 import LabelledInput from "./labbledInput";
 
 
-const AuthWithEmail = ({
-  email,
+ const AuthWithEmail = ({
+  email ,
   password,
   setEmail,
   setPassword,
   workingfunction,
-}: any) => {
+}:any) => {
   return (
     <div>
       <div className=" flex flex-col items-center my-16">

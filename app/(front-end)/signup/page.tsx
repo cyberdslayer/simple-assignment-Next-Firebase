@@ -10,6 +10,10 @@ import app from '@/config';
 import swal from 'sweetalert';
 import { useState } from 'react';
 import AuthWithEmail from '../components/authWithmail';
+import Spinner from '../components/spinner';
+
+
+
 
 export default function Signup() {
     const router = useRouter();
@@ -21,7 +25,6 @@ export default function Signup() {
         console.log(email, password);
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-
             console.log(userCredential)
             // Signed up 
             const user = userCredential.user;
@@ -46,6 +49,7 @@ export default function Signup() {
     }
 
     const signInWithGoogle = async ()=>{
+        setLoader("google");
         try{
             const provider = new GoogleAuthProvider();
             const auth = getAuth(app);
@@ -63,7 +67,14 @@ export default function Signup() {
                 timer: 5000
             })
         }
+
+        finally{
+            setLoader("")
+        }
     }
+
+    const [loader, setLoader] = useState("");
+   
 
     return ( 
         <div className="flex flex-col items-center md:h-screen lg:flex-row bg-[#071829] md:items-center justify-center ">
@@ -82,16 +93,17 @@ export default function Signup() {
                 <div className=' w-screen md:border shadow-2xl rounded-2xl  md:bg-[#192734] bg-opacity-80 text-center mt-1 md:mt-0 md:py-4  md:w-[80%] lg:my-20 lg:w-[50%] '>
                     <div className="text-white text-xl md:text-3xl font-bold mb-2 ">Sign up</div>
                     <div className='text-sm '> Choose a sign up method</div>
+
+
                     {
                         (isEmailMethod)? (
                             <AuthWithEmail email={email} password = {password} setPassword = {setPassword} setEmail = {setEmail} workingfunction = {signupWithEmail}/>
                         ): <div className=' flex flex-col items-center my-8 md:my-16'>
-
                             <button className=' border rounded-lg py-2 mb-6 w-2/3 flex items-center justify-center' onClick={signInWithGoogle}> 
-                            Continue with Google
+                                {loader == "google" ? <Spinner/> : "Continue with Google" }
                             </button>
                             <button className=' border rounded-lg py-2  w-2/3 flex items-center justify-center' onClick={()=>{setIsEmailMethod(true)}}> 
-                                Sign up with Email
+                               Sign up with Email                                
                             </button>
                         </div>
                         }
